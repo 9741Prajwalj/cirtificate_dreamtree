@@ -8,13 +8,10 @@
   <style>
     body {
       margin: 0;
-      padding: 0;
+      padding: 20px;
       background: #f3f3f3;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       font-family: 'Roboto', sans-serif;
+      user-select: none;
     }
 
     .certificate {
@@ -116,6 +113,22 @@
       font-weight: 400;
       user-select: text;
     }
+
+    #generate-pdf-btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      background-color: #1f4e5f;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    #generate-pdf-btn:hover {
+      background-color: #163d4a;
+    }
   </style>
 </head>
 <body>
@@ -141,5 +154,26 @@
       <img src="image/seal.jpeg" alt="Dreamtree seal" style="position: absolute; top: 165px; left: 130px; width: 80px; height: 60px;" />
     </div>
   </div>
+  <button id="generate-pdf-btn" aria-label="Generate PDF of certificate">Generate PDF</button>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script>
+    const { jsPDF } = window.jspdf;
+
+    document.getElementById('generate-pdf-btn').addEventListener('click', () => {
+      const certificate = document.getElementsByClassName('certificate')[0];
+      html2canvas(certificate, { scale: 2 }).then(canvas => {
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF({
+          orientation: 'landscape',
+          unit: 'px',
+          format: [certificate.offsetWidth, certificate.offsetHeight]
+        });
+        pdf.addImage(imgData, 'PNG', 0, 0, certificate.offsetWidth, certificate.offsetHeight);
+        pdf.save('certificate.pdf');
+      });
+    });
+  </script>
 </body>
 </html>
