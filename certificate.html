@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Certificate</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #f3f3f3;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    .certificate {
+      position: relative;
+      width: 900px;
+      height: 600px;
+      background-image: url('image/certificate.png');
+      background-size: cover;
+      background-position: center;
+      color: #1f4e5f;
+      padding: 60px 80px 60px 80px;
+      box-sizing: border-box;
+      user-select: none;
+    }
+
+    /* Container for text content positioned in empty spaces */
+    .content {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      color: #1f4e5f;
+    }
+
+    /* Only text that fills empty spaces, no duplicated logo or main title */
+
+    .certify-text {
+      font-size: 0.9rem;
+      letter-spacing: 1.5px;
+      color: #4a4a4a;
+      margin-top: 180px;
+      margin-bottom: 20px;
+      font-weight: 500;
+      text-align: center;
+    }
+
+    .recipient-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      padding-top: 45px;
+      margin: 25px auto 8px auto;
+      color: #1f4e5f;
+      text-align: center;
+      max-width: 600px;
+    }
+
+    .underline {
+      width: 400px;
+      height: 2px;
+      background-color: #b9975b;
+      margin: 0 auto 30px auto;
+      border-radius: 1px;
+    }
+
+    .description {
+      font-size: 14px;
+      max-width: 750px;
+      margin: 5px auto 40px auto;
+      color: #000;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .description strong {
+      font-weight: 700;
+      color: #000;
+    }
+
+    /* Footer container positioned near bottom */
+    .footer {
+      position: absolute;
+      bottom: 60px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      font-size: 0.9rem;
+      color: #000;
+      font-weight: 400;
+      user-select: text;
+    }
+
+    .footer-center {
+      width: 40%;
+      text-align: center;
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 1.3;
+      color: #000;
+      padding-bottom: 150px;
+    }
+    .date-footer{
+      position: absolute;
+      bottom: 180px;
+      right: 276px;
+      font-size: 16px;
+      font-family: 'Times New Roman', Times, serif;
+      color: #000;
+      font-weight: 400;
+      user-select: text;
+    }
+  </style>
+</head>
+<body>
+  <div class="certificate" role="main" aria-label="Certificate of Completion and Assessment">
+    <div class="content">
+      <p class="certify-text"></p>
+
+      <p class="recipient-name">Trisha Ravikumar</p>
+      <!-- <div class="underline"></div> -->
+
+      <p class="description">
+        has successfully completed the training and assessment in <strong>Java Basics</strong> under <strong>Dreamtree-Org</strong>.<br />
+        The recipient has demonstrated dedication, consistent effort, and competence in the required skills and knowledge,<br />
+        thereby meeting the standards of excellence established by our institution.
+      </p>
+
+      <div class="footer" aria-label="Certificate footer with certification number and date">
+        <div class="footer-center">
+          <p><strong>Certification No. :</strong><br />CRG/SMG/202508/002</p>
+        </div>
+      </div>
+      <p class="date-footer">Date : 13th September 2025</p>
+      <img src="image/seal.jpeg" alt="Dreamtree seal" style="position: absolute; top: 165px; left: 130px; width: 80px; height: 60px;" />
+    </div>
+  </div>
+</body>
+</html>
