@@ -97,18 +97,24 @@
       transform: translateY(-1px);
     }
 
-    .certificate {
+  .certificate {
       position: relative;
       width: 900px;
       height: 600px;
-      background-image: url('image/certificate.png');
-      background-size: cover;
-      background-position: center;
       color: #1f4e5f;
       padding: 60px 80px 60px 80px;
       box-sizing: border-box;
       user-select: none;
     }
+  #certificate-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 900px;
+      height: 600px;
+      z-index: 0;
+      object-fit: cover;
+  }
 
     /* Container for text content positioned in empty spaces */
     .content {
@@ -193,7 +199,7 @@
 
     .description {
       position: absolute;
-      top: 275px;
+      top: 265px;
       font-size: 14px;
       max-width: 750px;
       margin: 5px auto 40px auto;
@@ -225,14 +231,14 @@
     }
     .seal {
           position: absolute;
-          top: -50px;
+          top: -65px;
           left: 120px;
           width: 80px;
           height: 80px;
     }
     .footer-left {
       position:absolute;
-      top: 20px;
+      top: 10px;
       text-align: left;
       font-size: 0.9rem;
       display: flex;
@@ -258,7 +264,7 @@
 
     .footer-center {
       position: absolute;
-      top: 10px;
+      top: 3px;
       left: 40%;
       width: auto;
       text-align: center;
@@ -273,7 +279,7 @@
       font-weight: 400;
       font-family: 'Times New Roman', Times, serif;
       font-size: 16px;
-      margin-top: 5px;
+      margin-top: -5px;
     }
 
     .footer-right {
@@ -284,7 +290,7 @@
       flex-direction: column;
       align-items: center;
       gap: 5px;
-      top: 20px;
+      top: 10px;
       right: 5.5%;
     }
 
@@ -298,9 +304,9 @@
       margin: 0;
     }
 
-    .logo-hidden {
+    /* .logo-hidden {
       display: none;
-    }
+    } */
 
     .date-footer{
       position: absolute;
@@ -330,7 +336,7 @@
     }
     .signature {
       position: absolute;
-      top: -35px;
+      top: -45px;
       right: 70px;
       width: 150px;
       height: 80px;
@@ -342,7 +348,7 @@
   <!-- DreamTree Customize Certiifcate -->
   <div class="form-container">
     <form id="certificate-form">
-      <img src="image/logo_dreamtree.jpeg" alt="Dreamtree Logo" width="400" height="60" style="display: block; margin: 0 auto 20px auto;" />
+      <img src="image/logo_dreamtree.jpeg" alt="Dreamtree Logo" width="400" height="60" style="display: block; margin: 0 auto 20px auto;"/>
       <h2> DreamTree Customize Certificate</h2>
       <div class="form-group">
         <label for="recipient-name-input">Student Name:</label>
@@ -364,10 +370,11 @@
   </div>
   
   <div class="certificate" role="main" aria-label="Certificate of Completion and Assessment">
+    <img id="certificate-bg" src="image/certificate.png" alt="" />
     <div class="content">
       <div class="header-section">
         <!-- <span>Dreamtree-Org</span> -->
-        <img src="image/logo_dreamtree.jpeg" alt="Dreamtree Logo" width="300" height="50" />
+        <img src="image/logo_dreamtree.jpeg" alt="Dreamtree Logo" width="300" height="50"  />
       </div>
       <h1 class="main-title">CERTIFICATE</h1>
       <h3 class="subtitle">OF COMPLETION &amp; ASSESSMENT</h3>
@@ -400,8 +407,6 @@
         thereby meeting the standards of excellence established by our institution.
       </p>
 
-      <img src="image/logo_dreamtree.jpeg" alt="Dreamtree Logo" class="logo-hidden" />
-
     </div>
   </div>
   <button id="generate-pdf-btn" aria-label="Generate PDF of certificate">Generate PDF</button>
@@ -413,15 +418,23 @@
 
     document.getElementById('generate-pdf-btn').addEventListener('click', () => {
       const certificate = document.getElementsByClassName('certificate')[0];
-      html2canvas(certificate, { scale: 2 }).then(canvas => {
-        const imgData = canvas.toDataURL('image/png');
-        const pdf = new jsPDF({
-          orientation: 'landscape',
-          unit: 'px',
-          format: [certificate.offsetWidth, certificate.offsetHeight]
-        });
-        pdf.addImage(imgData, 'PNG', 0, 0, certificate.offsetWidth, certificate.offsetHeight);
-        pdf.save('certificate.pdf');
+      const pdf = new jsPDF({
+        orientation: 'landscape',
+        unit: 'px',
+        format: [900, 600]
+      });
+      pdf.html(certificate, {
+        callback: function (pdf) {
+          if (pdf.getNumberOfPages() > 1) {
+            pdf.deletePage(1);
+          }
+          pdf.save('certificate.pdf');
+        },
+        x: 0,
+        y: 0,
+        width: 900,
+        height: 600,
+        autoPaging: false
       });
     });
 
